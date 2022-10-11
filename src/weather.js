@@ -55,17 +55,32 @@ export default class Weather {
         document.querySelector('.weather__summary').innerHTML = weather;
 
         const icon = data.current.condition.icon;
-        console.log(icon);
         document.querySelector(".icon").src = icon;
 
         switch (true)
         {
-            case (temp > 20):
-            alert('gt');
+            case (50 > temp >= 25):
+            this.city = 'stockholm';
             break;
-            case (temp <= 20):
-            alert('lt');
+            case (25 > temp >= 15):
+            this.city = 'london';
+            break; 
+            case (15 > temp >= 0):
+            this.city = 'bordeaux';
+            break; 
+            case (0 > temp >= 15):
+            this.city = 'madrid';
             break; 
         }
+
+        fetch(`http://engine.hotellook.com/api/v2/lookup.json?query=${this.city}&lang=en&lookFor=both&limit=1&token=63e0db9455b4c4db38c8401e8a6ad8a0`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                console.log(data.results.hotels[0].label);
+            })
+            .catch(err => console.error(err));
+
+
     }
 }
