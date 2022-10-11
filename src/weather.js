@@ -48,14 +48,24 @@ export default class Weather {
     displayWeather(data) {
         // display the weather data
         const temp = data.current.temp_c;
-        document.querySelector('.weather__temp').innerHTML = temp + '°C';
+        console.log(data.current);
+        document.querySelector('.weather__temp').innerHTML = `${temp}°C`;
 
         const weather = data.current.condition.text;
         document.querySelector('.weather__summary').innerHTML = weather;
 
         const icon = data.current.condition.icon;
-        const img = document.createElement('img');
-        img.src = icon;
-        document.querySelector('.weather__icon').appendChild(img);
+        console.log(icon);
+        document.querySelector(".icon").src = icon;
+
+        switch (true)
+        {
+            case (temp > 20):
+            alert('gt');
+            break;
+            case (temp <= 20):
+            alert('lt');
+            break; 
+        }
     }
 }
