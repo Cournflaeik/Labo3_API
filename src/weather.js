@@ -60,27 +60,32 @@ export default class Weather {
         switch (true)
         {
             case (50 > temp >= 25):
-            this.city = 'stockholm';
+                this.city = 'stockholm';
+                this.description = "It's wayyy too hot outside, go visit a cooler place like sweden or something.";
             break;
             case (25 > temp >= 15):
-            this.city = 'london';
+                this.city = 'london';
+                this.description = "Perfect weather for a trip to a cool place like the UK.";
             break; 
             case (15 > temp >= 0):
-            this.city = 'bordeaux';
+                this.city = 'bordeaux';
+                this.description = "It's a bit chilly outside, go visit a warmer place like the south of france.";
             break; 
-            case (0 > temp >= 15):
-            this.city = 'madrid';
+            case (0 > temp >= -15):
+                this.city = 'madrid';
+                this.description = "How are you not freezing to death?! Go warm up quickly in Spain.";
             break; 
         }
 
         fetch(`http://engine.hotellook.com/api/v2/lookup.json?query=${this.city}&lang=en&lookFor=both&limit=1&token=63e0db9455b4c4db38c8401e8a6ad8a0`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                console.log(data.results.hotels[0].label);
-            })
-            .catch(err => console.error(err));
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            console.log(data.results.hotels[0].label);
+            document.querySelector('.hotel__description').innerHTML = this.description + " Here's a hotel in " + this.city + " we recommend: " + data.results.hotels[0].label;
 
-
+        })
+        .catch(err => console.error(err));
+        
     }
 }
