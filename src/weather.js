@@ -57,6 +57,7 @@ export default class Weather {
         const icon = data.current.condition.icon;
         document.querySelector(".icon").src = icon;
 
+        //choose a location based on the temperature and add a description
         switch (true)
         {   
             case (50 > temp >= 25):
