@@ -78,7 +78,7 @@ export default class Weather {
             break; 
         }
         // display the city and description
-        fetch(`http://engine.hotellook.com/api/v2/lookup.json?query=${this.city}&lang=en&lookFor=both&limit=1&token=63e0db9455b4c4db38c8401e8a6ad8a0`)
+        fetch(`https://engine.hotellook.com/api/v2/lookup.json?query=${this.city}&lang=en&lookFor=both&limit=1&token=63e0db9455b4c4db38c8401e8a6ad8a0`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
