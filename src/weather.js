@@ -58,7 +58,7 @@ export default class Weather {
         document.querySelector(".icon").src = icon;
 
         switch (true)
-        {
+        {   
             case (50 > temp >= 25):
                 this.city = 'stockholm';
                 this.description = "It's wayyy too hot outside, go visit a cooler place like sweden or something.";
@@ -76,16 +76,17 @@ export default class Weather {
                 this.description = "How are you not freezing to death?! Go warm up quickly in Spain.";
             break; 
         }
-
+        // display the city and description
         fetch(`http://engine.hotellook.com/api/v2/lookup.json?query=${this.city}&lang=en&lookFor=both&limit=1&token=63e0db9455b4c4db38c8401e8a6ad8a0`)
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            console.log(data.results.hotels[0].label);
             document.querySelector('.hotel__description').innerHTML = this.description + " Here's a hotel in " + this.city + " we recommend: " + data.results.hotels[0].label;
-
+            console.log(data.results.hotels[0].id);
+            // display the hotel image
+            document.querySelector('.hotel__img').src = `https://photo.hotellook.com/image_v2/limit/h${data.results.hotels[0].id}_1/800/520.auto`;
+            console.log("image added");
         })
         .catch(err => console.error(err));
-        
     }
 }
